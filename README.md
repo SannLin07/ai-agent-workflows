@@ -1,9 +1,9 @@
-# Flutter Engineering System
+# Personal AI-Assisted Software Engineering System
 
-A reusable engineering playbook for future Flutter projects. It brings together standards, AI-agent guidance, development workflows, templates, and lessons learned so each new project can start from a consistent foundation.
+A reusable engineering playbook for future software projects. Flutter is the starting focus, with room to add other languages and platforms as real projects require them.
 
-The repository is being built incrementally. The first step defines its structure and the boundaries between its materials:
+This repository is in the design phase. The Phase 1 proposal defines its structure, decision models, and future implementation plan:
 
-- [Phase 1: Repository Architecture](PHASE-1-REPOSITORY-ARCHITECTURE.md)
+- [Phase 1: System Design](PHASE-1-SYSTEM-DESIGN.md)
 
-The long-term goal is to use this playbook across real Flutter projects and improve it as new experience is gained.
+The goal is to apply the playbook to real projects and improve it as experience is gained. No project starter or autonomous agents have been implemented yet.
