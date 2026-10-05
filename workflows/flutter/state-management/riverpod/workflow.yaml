@@ -1,0 +1,13 @@
+id: flutter.state-management.riverpod
+name: Riverpod
+category: state-management
+platform: flutter
+version: 0.1.0
+status: draft
+description: Riverpod workflow for Flutter projects.
+entrypoint: workflow.md
+requires: []
+conflicts_with:
+  - flutter.state-management.getx
+  - flutter.state-management.bloc
+  - flutter.state-management.provider

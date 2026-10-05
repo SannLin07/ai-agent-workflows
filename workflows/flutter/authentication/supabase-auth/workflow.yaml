@@ -1,0 +1,10 @@
+id: flutter.authentication.supabase-auth
+name: Supabase Auth
+category: authentication
+platform: flutter
+version: 0.1.0
+status: draft
+description: Supabase Auth workflow for Flutter projects.
+entrypoint: workflow.md
+requires: []
+conflicts_with: []

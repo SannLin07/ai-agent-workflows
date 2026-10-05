@@ -1,0 +1,13 @@
+id: flutter.state-management.provider
+name: Provider
+category: state-management
+platform: flutter
+version: 0.1.0
+status: draft
+description: Provider workflow for Flutter projects.
+entrypoint: workflow.md
+requires: []
+conflicts_with:
+  - flutter.state-management.getx
+  - flutter.state-management.riverpod
+  - flutter.state-management.bloc

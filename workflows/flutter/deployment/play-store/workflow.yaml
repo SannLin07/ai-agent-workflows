@@ -1,0 +1,10 @@
+id: flutter.deployment.play-store
+name: Google Play Store release
+category: deployment
+platform: flutter
+version: 0.1.0
+status: draft
+description: Google Play Store release workflow for Flutter projects.
+entrypoint: workflow.md
+requires: []
+conflicts_with: []

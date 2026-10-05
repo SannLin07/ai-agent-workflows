@@ -1,0 +1,19 @@
+# Local editor and operating-system files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local project credentials and environment files
+.env
+.env.*
+!.env.example
+*.keystore
+*.jks
+service-account*.json
+
+# Generated documentation or temporary validation output
+.site/
+.cache/
+*.log

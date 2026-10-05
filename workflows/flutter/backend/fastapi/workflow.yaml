@@ -1,0 +1,10 @@
+id: flutter.backend.fastapi
+name: FastAPI backend
+category: backend
+platform: flutter
+version: 0.1.0
+status: draft
+description: FastAPI backend workflow for Flutter projects.
+entrypoint: workflow.md
+requires: []
+conflicts_with: []

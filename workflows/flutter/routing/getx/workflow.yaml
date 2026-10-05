@@ -1,0 +1,10 @@
+id: flutter.routing.getx
+name: GetX routing
+category: routing
+platform: flutter
+version: 0.1.0
+status: draft
+description: GetX routing workflow for Flutter projects.
+entrypoint: workflow.md
+requires: []
+conflicts_with: []

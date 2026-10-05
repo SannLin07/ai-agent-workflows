@@ -1,0 +1,10 @@
+id: flutter.deployment.android
+name: Android release build
+category: deployment
+platform: flutter
+version: 0.1.0
+status: draft
+description: Android release build workflow for Flutter projects.
+entrypoint: workflow.md
+requires: []
+conflicts_with: []

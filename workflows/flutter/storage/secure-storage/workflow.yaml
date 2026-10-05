@@ -1,0 +1,10 @@
+id: flutter.storage.secure-storage
+name: Secure Storage
+category: storage
+platform: flutter
+version: 0.1.0
+status: draft
+description: Secure Storage workflow for Flutter projects.
+entrypoint: workflow.md
+requires: []
+conflicts_with: []

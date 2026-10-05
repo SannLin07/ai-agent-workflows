@@ -1,0 +1,20 @@
+# Copy to the project root and complete the selected workflow IDs.
+schema_version: 1
+project:
+  name: replace_with_project_name
+  platform: [android]
+flutter:
+  state_management: getx
+  architecture: [feature-based]
+  networking: [dio]
+  routing: getx
+  storage: []
+  authentication: []
+  backend: []
+testing:
+  levels: [unit, widget]
+  release_channels: []
+deployment:
+  targets: [android]
+  distribution: []
+workflow_versions: {}

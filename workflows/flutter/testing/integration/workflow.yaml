@@ -1,0 +1,10 @@
+id: flutter.testing.integration
+name: Integration testing
+category: testing
+platform: flutter
+version: 0.1.0
+status: draft
+description: Integration testing workflow for Flutter projects.
+entrypoint: workflow.md
+requires: []
+conflicts_with: []

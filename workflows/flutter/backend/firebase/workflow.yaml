@@ -1,0 +1,10 @@
+id: flutter.backend.firebase
+name: Firebase backend services
+category: backend
+platform: flutter
+version: 0.1.0
+status: draft
+description: Firebase backend services workflow for Flutter projects.
+entrypoint: workflow.md
+requires: []
+conflicts_with: []

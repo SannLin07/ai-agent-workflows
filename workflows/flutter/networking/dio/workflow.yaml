@@ -1,0 +1,10 @@
+id: flutter.networking.dio
+name: Dio HTTP client
+category: networking
+platform: flutter
+version: 0.1.0
+status: draft
+description: Dio HTTP client workflow for Flutter projects.
+entrypoint: workflow.md
+requires: []
+conflicts_with: []

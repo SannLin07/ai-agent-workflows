@@ -1,0 +1,10 @@
+id: flutter.storage.hive
+name: Hive-compatible local object storage
+category: storage
+platform: flutter
+version: 0.1.0
+status: draft
+description: Hive-compatible local object storage workflow for Flutter projects.
+entrypoint: workflow.md
+requires: []
+conflicts_with: []

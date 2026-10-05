@@ -1,0 +1,13 @@
+id: flutter.state-management.getx
+name: GetX state management
+category: state-management
+platform: flutter
+version: 0.1.0
+status: draft
+description: Practical GetX controller, reactive state, dependency, and lifecycle workflow for Flutter applications.
+entrypoint: workflow.md
+requires: []
+conflicts_with:
+  - flutter.state-management.riverpod
+  - flutter.state-management.bloc
+  - flutter.state-management.provider

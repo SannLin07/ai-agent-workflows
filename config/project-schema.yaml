@@ -1,0 +1,112 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: AI Agent Workflow Project Configuration
+description: Selects reusable workflow modules for one project.
+type: object
+additionalProperties: false
+required: [schema_version, project, flutter, testing, deployment]
+properties:
+  schema_version:
+    const: 1
+  project:
+    type: object
+    additionalProperties: false
+    required: [name, platform]
+    properties:
+      name:
+        type: string
+        minLength: 1
+      platform:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          enum: [android, ios, web, macos, windows, linux]
+  flutter:
+    type: object
+    additionalProperties: false
+    required: [state_management, architecture, networking, routing, storage, authentication, backend]
+    properties:
+      state_management:
+        enum: [getx, riverpod, bloc, provider]
+      architecture:
+        $ref: '#/$defs/architectureSelections'
+      networking:
+        $ref: '#/$defs/networkingSelections'
+      routing:
+        enum: [getx, go-router]
+      storage:
+        $ref: '#/$defs/storageSelections'
+      authentication:
+        $ref: '#/$defs/authenticationSelections'
+      backend:
+        $ref: '#/$defs/backendSelections'
+  testing:
+    type: object
+    additionalProperties: false
+    required: [levels, release_channels]
+    properties:
+      levels:
+        type: array
+        uniqueItems: true
+        items:
+          enum: [unit, widget, integration]
+      release_channels:
+        type: array
+        uniqueItems: true
+        items:
+          enum: [closed-testing, open-testing]
+  deployment:
+    type: object
+    additionalProperties: false
+    required: [targets, distribution]
+    properties:
+      targets:
+        type: array
+        uniqueItems: true
+        items:
+          enum: [android, ios]
+      distribution:
+        type: array
+        uniqueItems: true
+        items:
+          enum: [play-store]
+  workflow_versions:
+    type: object
+    description: Optional module ID to adopted semantic version pins.
+    propertyNames:
+      pattern: '^flutter\.[a-z0-9-]+\.[a-z0-9-]+$'
+    additionalProperties:
+      type: string
+      pattern: '^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[0-9A-Za-z.-]+)?$'
+$defs:
+  slugList:
+    type: array
+    uniqueItems: true
+    items:
+      type: string
+      minLength: 1
+  architectureSelections:
+    allOf:
+      - $ref: '#/$defs/slugList'
+      - items:
+          enum: [feature-based, clean-architecture, layered, mvvm]
+  networkingSelections:
+    allOf:
+      - $ref: '#/$defs/slugList'
+      - items:
+          enum: [dio, http, retrofit]
+  storageSelections:
+    allOf:
+      - $ref: '#/$defs/slugList'
+      - items:
+          enum: [hive, shared-preferences, secure-storage, sqlite]
+  authenticationSelections:
+    allOf:
+      - $ref: '#/$defs/slugList'
+      - items:
+          enum: [firebase-auth, google-oauth, jwt, supabase-auth]
+  backendSelections:
+    allOf:
+      - $ref: '#/$defs/slugList'
+      - items:
+          enum: [rest-api, fastapi, firebase]

@@ -1,0 +1,55 @@
+schema_version: 1
+
+project:
+  name: example_app
+  platform:
+    - android
+    - ios
+
+flutter:
+  state_management: getx
+  architecture:
+    - feature-based
+  networking:
+    - dio
+  routing: getx
+  storage:
+    - hive
+    - secure-storage
+  authentication:
+    - firebase-auth
+    - google-oauth
+  backend:
+    - firebase
+
+testing:
+  levels:
+    - unit
+    - widget
+    - integration
+  release_channels:
+    - closed-testing
+
+deployment:
+  targets:
+    - android
+  distribution:
+    - play-store
+
+# Pin the independently versioned modules this project has adopted.
+workflow_versions:
+  flutter.state-management.getx: 0.1.0
+  flutter.architecture.feature-based: 0.1.0
+  flutter.networking.dio: 0.1.0
+  flutter.routing.getx: 0.1.0
+  flutter.storage.hive: 0.1.0
+  flutter.storage.secure-storage: 0.1.0
+  flutter.authentication.firebase-auth: 0.1.0
+  flutter.authentication.google-oauth: 0.1.0
+  flutter.backend.firebase: 0.1.0
+  flutter.testing.unit: 0.1.0
+  flutter.testing.widget: 0.1.0
+  flutter.testing.integration: 0.1.0
+  flutter.testing.closed-testing: 0.1.0
+  flutter.deployment.android: 0.1.0
+  flutter.deployment.play-store: 0.1.0

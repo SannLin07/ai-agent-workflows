@@ -1,0 +1,11 @@
+id: flutter.networking.retrofit
+name: Retrofit generated API client
+category: networking
+platform: flutter
+version: 0.1.0
+status: draft
+description: Retrofit generated API client workflow for Flutter projects.
+entrypoint: workflow.md
+requires:
+  - flutter.networking.dio
+conflicts_with: []

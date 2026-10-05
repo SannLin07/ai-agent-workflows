@@ -1,0 +1,11 @@
+id: flutter.testing.open-testing
+name: Android open testing
+category: testing
+platform: flutter
+version: 0.1.0
+status: draft
+description: Android open testing workflow for Flutter projects.
+entrypoint: workflow.md
+requires:
+  - flutter.deployment.play-store
+conflicts_with: []

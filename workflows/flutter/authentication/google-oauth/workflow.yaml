@@ -1,0 +1,10 @@
+id: flutter.authentication.google-oauth
+name: Google OAuth sign-in
+category: authentication
+platform: flutter
+version: 0.1.0
+status: draft
+description: Google OAuth sign-in workflow for Flutter projects.
+entrypoint: workflow.md
+requires: []
+conflicts_with: []

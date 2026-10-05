@@ -1,0 +1,10 @@
+id: flutter.storage.shared-preferences
+name: Shared Preferences
+category: storage
+platform: flutter
+version: 0.1.0
+status: draft
+description: Shared Preferences workflow for Flutter projects.
+entrypoint: workflow.md
+requires: []
+conflicts_with: []

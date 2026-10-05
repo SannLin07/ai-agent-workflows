@@ -1,0 +1,10 @@
+id: flutter.authentication.firebase-auth
+name: Firebase Authentication
+category: authentication
+platform: flutter
+version: 0.1.0
+status: draft
+description: Firebase Authentication workflow for Flutter projects.
+entrypoint: workflow.md
+requires: []
+conflicts_with: []
