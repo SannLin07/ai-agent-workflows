@@ -1,32 +1,40 @@
 # Agent context loading
 
-Use the project configuration as an index, not as permission to load the whole library.
+Use the Flutter project's configuration as an index into this library, not as a reason to load every workflow. A senior-quality change depends on the project's actual SDK constraints, architecture, conventions, and acceptance criteria as well as the selected modules. Load enough context to make a sound decision, then keep unrelated guidance out of the task.
 
-## Load in this order
+## Load context in this order
 
-1. Read the applicable system, platform, and user instructions.
-2. Read the project's `project.yaml`, local `AGENTS.md` or equivalent, and accepted architecture decisions that affect the task.
-3. Read the global rules that bear on the change: coding, Git, security, error handling, logging, documentation, and dependency management.
-4. Resolve selected workflow IDs to `workflows/<platform>/<category>/<slug>/workflow.yaml`. Read each selected module's `entrypoint` only when it applies to the task; follow its `requires` recursively.
-5. Load additional module references only when the task reaches that branch, such as GetX testing guidance when changing a controller test.
-6. Before finishing, compare the change with the selected workflow's verification and completion criteria.
+1. **Read higher-priority instructions and the task.** Identify the requested behavior, acceptance criteria, constraints, and any applicable system, platform, or user instructions.
+2. **Understand the Flutter project.** Read `project.yaml` when present, local `AGENTS.md` or equivalent, and accepted architecture decisions that affect the change. Inspect the relevant parts of `pubspec.yaml`, the lockfile, `analysis_options.yaml`, platform configuration, nearby implementation, and tests when they determine APIs, supported targets, conventions, or verification commands. Report missing configuration or conflicting project decisions instead of inventing defaults.
+3. **Load shared rules that apply.** Read the coding rules, then the relevant Git, security, error-handling, logging, documentation, and dependency-management rules. Keep each shared rule in its canonical file; workflow documents link to those rules rather than replacing them.
+4. **Resolve selected workflow IDs.** Map each selected ID to `workflows/<platform>/<category>/<slug>/workflow.yaml`. Confirm its category, version, and declared `entrypoint`. Read an entrypoint when its subject affects the task, and recursively load every module named in `requires`.
+5. **Load branch-specific references when needed.** Read a module's package list, checklist, test guide, or other nearby reference only when the implementation reaches that topic. For example, consult GetX controller testing guidance when changing a controller test.
+6. **Compare the implementation with its evidence.** Before finishing, check the change against acceptance criteria and the selected workflows' verification and completion criteria. Report which workflow guidance informed the work and which checks ran or remain unverified.
 
-For a Flutter task, `flutter.state_management` and `flutter.routing` each identify one workflow. Each ID in the architecture, networking, storage, authentication, backend, and testing lists identifies one workflow. Translate category and slug directly to the matching module path. A missing or unknown ID is an unresolved configuration issue; do not substitute a nearby technology silently.
+## Resolve Flutter selections
 
-## Check combinations
+For a Flutter project, `flutter.state_management` and `flutter.routing` each identify one workflow. Each ID in the architecture, networking, storage, authentication, backend, and testing lists identifies a workflow. Translate the category and slug directly to the matching module path. A missing or unknown ID is an unresolved configuration issue; do not substitute a nearby technology silently.
 
-- Load mandatory modules named in `requires` even if they were not separately selected.
-- Reject pairs named by either module's `conflicts_with`.
-- Treat `compatible_with` as a positive hint, never as proof that all unlisted pairings are incompatible.
-- Enforce one state-management module and one routing module. If multiple architectures are selected, require an explicit composition decision. For other list categories, inspect actual module constraints rather than assuming every pairing is safe.
-- If a project pin differs from the selected module's version, use the project's pinned version when it is available in the library. If unavailable, report the mismatch and ask how to proceed.
+The project configuration selects possible technologies for the app. It does not mean every selected module is relevant to every task. For a widget-only change, skip authentication and database guidance unless the behavior touches those boundaries. For an authenticated API feature, load the selected architecture, state management, networking, routing, authentication, secure storage, and testing guidance that the feature crosses.
+
+## Check module combinations and versions
+
+- Load every mandatory module named in `requires`, even when the project did not select it separately.
+- Treat a pair as a hard conflict when either module names the other in `conflicts_with`.
+- Treat `compatible_with` as a positive hint, not a complete compatibility matrix. Check actual module requirements before combining selections that are not listed as compatible.
+- Enforce one primary state-management workflow and one routing workflow. If the project selects multiple architecture modules, require an accepted decision that explains how they compose. Combine other list categories only when the project has a concrete use for each module.
+- If a project pin differs from the selected module version, use the pinned version when that version is available in the library. If it is unavailable, report the mismatch and ask how to proceed.
 
 ## Resolve conflicts openly
 
-Higher-priority platform or system instructions always apply. Within the project, an explicit current user instruction can change a project decision; record the change if it affects durable configuration. Accepted project-specific decisions and rules define local constraints. The project configuration selects technologies. Global MUST rules and selected workflow MUST rules still apply within their stated scope; a conflict between them or with an accepted project decision must be shown to the user. The agent should identify the exact conflicting statements and ask for a resolution when the task cannot proceed safely. It should not silently discard a rule. SHOULD and default guidance can be adapted with a stated reason.
+Higher-priority system and platform instructions always apply. Within the project, an explicit current user instruction can change a project decision; record the change when it affects durable configuration. Accepted project decisions and local rules constrain implementation, while the project configuration selects technologies.
 
-Security and privacy requirements are hard guardrails: a project rule or user preference cannot turn credential exposure or unsafe handling into an acceptable implementation. Explain the constraint and offer a safe implementation.
+Global MUST rules and selected workflow MUST rules apply within their stated scope. When one conflicts with another or with an accepted project decision, identify the exact statements and ask for a resolution if the task cannot proceed safely. Adapt SHOULD-level and default guidance only with a clear reason. Do not silently discard a rule.
+
+Security and privacy requirements remain hard constraints. A project rule or user preference cannot make credential exposure or an unsafe access boundary acceptable. Explain the constraint and continue with a safe implementation path.
 
 ## Keep context task-sized
 
-Load only the entrypoints related to the task. For example, a text-only change does not need the SQLite or authentication workflows. A new authenticated API feature may need state management, architecture, networking, routing, secure storage, authentication, and relevant testing guidance. Record which modules actually informed the change in the final summary when that helps the developer review it.
+Read only the entrypoints that bear on the change, and follow their required modules. A text-only documentation change usually needs no Flutter feature workflows. A layout change may need the selected architecture, state-management, and widget-testing guidance. A new authenticated API flow may need architecture, state management, networking, routing, secure storage, authentication, the API contract, and relevant tests.
+
+Add detail as the task reaches a boundary, such as package-specific setup, code generation, controller lifecycle, or a platform release step. This keeps the agent's decisions grounded in the project without making it repeat unrelated library instructions.

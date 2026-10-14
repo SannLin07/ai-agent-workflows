@@ -2,7 +2,7 @@ id: flutter.testing.unit
 name: Unit testing
 category: testing
 platform: flutter
-version: 0.1.0
+version: 0.2.0
 status: draft
 description: Unit testing workflow for Flutter projects.
 entrypoint: workflow.md

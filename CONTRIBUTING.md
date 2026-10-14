@@ -1,34 +1,40 @@
 # Contributing
 
-This repository is maintained to stay useful to one developer and to AI agents. Prefer a small, actionable change over a broad catalog expansion.
+This repository maintains reusable workflows for Flutter application work. Add or revise guidance when it addresses a concrete need from a Flutter project. Write for a developer and an AI agent who need enough context to make and verify a sound implementation decision. Follow the detailed, Flutter-centered guidance in [`shared/documentation/README.md`](shared/documentation/README.md).
 
 ## Add or change a workflow
 
-- Keep a stable module ID and path. A renamed display title does not require changing the ID.
-- Include `workflow.yaml` plus its declared `entrypoint`. Keep procedures in the entrypoint and disclose branch-specific reference into a nearby file only when it materially helps.
-- State purpose, suitable and unsuitable use, ordered actions, verification, and completion criteria.
-- Put cross-cutting rules in `shared/`; link to their canonical files.
-- Use `requires` for mandatory modules and `conflicts_with` only for combinations that cannot safely coexist. Compatibility claims are advisory and must be evidence-based.
-- Use `draft` until the workflow has been applied to a real project. Record concrete gaps for the next revision.
+1. **Start from a real need.** Define the Flutter project situation the workflow serves and the task branches it covers. Keep a module focused on one coherent decision or capability.
+2. **Preserve its identity.** Keep the module's stable ID and path when revising it. A display-name change does not require an ID change.
+3. **Keep procedure and metadata aligned.** Include `workflow.yaml` and the file declared by its `entrypoint`. Confirm the metadata ID, category, platform, version, dependencies, and entrypoint agree with the directory and procedure.
+4. **Write an actionable procedure.** Explain when the workflow applies and when it does not, the decisions and tradeoffs a Flutter developer must consider, the ordered implementation steps, and the evidence required to complete the task. Include lifecycle, async state, platform, accessibility, performance, or error details when they affect the module.
+5. **Use canonical shared rules.** Keep cross-cutting guidance in `shared/` and link to it from the workflow. Use `requires` only for mandatory modules. Use `conflicts_with` only for selections that cannot safely coexist; record compatibility claims only when there is evidence for them.
+6. **Keep maturity evidence-based.** Set a new or unpiloted workflow to `status: draft`. Promote it only after a real Flutter project has used the guidance; record concrete gaps and follow-up work from that use.
+7. **Update discovery files.** When a module becomes selectable, update the project schema and example configuration. Add it to the root README and document real compatibility constraints where they help project selection.
 
 ## Version changes
 
-Start new modules at `0.1.0`. Increase patch for corrections and clarifications, minor for compatible additions, and major when the module's selection contract or required behavior changes incompatibly. Update project pins when deliberately adopting a new version. The root `VERSION` changes only for a release of the collection; it does not replace module versions.
+Start new modules at `0.1.0`. Increase the patch version for clarifications and corrections that do not change expected behavior. Increase the minor version for backward-compatible additions. Increase the major version when the selection contract or required behavior changes incompatibly. Update a consuming project's pins only when it deliberately adopts the new module version.
+
+The root `VERSION` identifies a release of the workflow collection. It does not replace independent module versions and changes only when the collection is released.
 
 ## Package and platform facts
 
-Prefer official package registries and vendor documentation. For every package recommendation record its name, purpose, compatible constraint, direct source URL, notes, and `verified_on` date. Recheck volatile platform steps when updating them. Constraints are recommendations, not lockfiles; the consuming project's resolver and lockfile determine installed versions.
+Treat package constraints as dated recommendations. For every package recommendation, record the package name, purpose, compatible constraint, direct authoritative source URL, relevant notes, and `verified_on` date. Check the consuming project's Flutter and Dart constraints, supported platforms, release activity, license, and migration guidance before recommending a package or major upgrade.
+
+For platform and deployment instructions, cite the vendor's current documentation and record when the instructions were checked. Add an owner or review trigger when a fact can change. The consuming project's dependency resolver and lockfile determine installed package versions.
 
 ## Troubleshooting evidence
 
-Add an incident only after observing it. Record the affected environment, exact error or other evidence, investigation, confirmed root cause or unresolved hypotheses, solution, verification, prevention, and related workflow. Keep secrets, tokens, personal data, and private logs out of the record.
+Create an incident record only after a problem has been observed and investigated. Include the affected Flutter, Dart, package, and platform versions; exact sanitized evidence; investigation steps; confirmed cause or remaining hypotheses; fix; verification; prevention; and related workflow. Keep secrets, tokens, personal data, and private logs out of the record.
 
 ## Review checklist
 
-- Is the module discoverable through the root README and project schema when applicable?
-- Do the metadata ID, path, category, entrypoint, dependencies, and version agree?
-- Are instructions actionable and scoped to their selected technology?
-- Are conflicts explicit and minimal?
-- Are factual claims dated and sourced where they can change?
-- Is any content duplicated instead of linked to its canonical rule?
-- Does the change avoid implying that scripts, a package manager, or an orchestration engine exist?
+- Does the workflow address a real Flutter project need and make its scope clear?
+- Do its ID, directory, category, platform, `workflow.yaml`, entrypoint, dependencies, and version agree?
+- Are the procedure, tradeoffs, verification steps, and completion criteria clear enough to follow and check?
+- Are cross-cutting rules linked from their canonical files, with no duplicated policy?
+- Are hard conflicts minimal and supported by a concrete incompatibility?
+- Are package and platform facts sourced, dated, and paired with a review trigger when they can change?
+- Are schema, example configuration, and README discovery updated when a module becomes selectable?
+- Does the change describe only tooling and automation that actually exist?

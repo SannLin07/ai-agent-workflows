@@ -1,18 +1,18 @@
 # AI Agent Workflows
 
-A small, versioned library of engineering workflows that a developer can select for each project and give to an AI coding agent. The library starts with Flutter and can grow to other stacks when real projects need them.
+A versioned library of Flutter engineering workflows that a developer can select for each Flutter project and give to an AI coding agent. Its main scope is Flutter app development. Optional backend modules provide guidance for API and service boundaries that a Flutter app uses when those integrations are part of the project.
 
 It provides reusable instructions. It is not a Flutter starter app, generator, package manager, or agent orchestration system.
 
 ## How it works
 
-1. Copy [`config/example-project.yaml`](config/example-project.yaml) into the project as `project.yaml` and edit the selections.
-2. Read [`shared/documentation/agent-context-loading.md`](shared/documentation/agent-context-loading.md) to determine the minimum context needed for the task.
-3. Load the global rules and only the selected workflow modules. Follow each module's `entrypoint` and recursively load its `requires` modules.
-4. Check `conflicts_with`, category cardinality, and the project’s pinned versions before changing code. Ask about unresolved conflicts instead of silently choosing.
-5. Apply project-specific rules and the current task, then report which workflow guidance was used and any checks that remain.
+1. Copy [`config/example-project.yaml`](config/example-project.yaml) into the Flutter project as `project.yaml`. Select the app's platforms and the workflows it actually uses, then pin the adopted module versions when the project needs reproducible guidance.
+2. Read the Flutter project's local instructions, accepted decisions, and existing conventions. Then use [`shared/documentation/agent-context-loading.md`](shared/documentation/agent-context-loading.md) to identify the smallest set of guidance that applies to the task.
+3. Load the relevant shared rules and selected workflow entrypoints. Follow each module's `entrypoint` and recursively load its required modules so mandatory guidance is not missed.
+4. Check `conflicts_with`, category cardinality, architecture composition, and the project's pinned versions before implementation. Surface unresolved conflicts instead of choosing a technology silently.
+5. Implement the requested behavior within the project's established boundaries. Verify it against acceptance criteria and applicable workflow checks, then report the guidance used and the checks that ran or remain unverified.
 
-The library is a reference for the agent. Copy or link the selected context into each project; this repository does not fetch files or configure agents automatically.
+The library is a reference for the agent. Copy or link the selected context into each Flutter project; this repository does not fetch files or configure agents automatically. Backend modules are optional and belong in a project selection only when the Flutter app's API or service integration is part of the work.
 
 ## Select workflows
 
@@ -49,6 +49,24 @@ workflow_versions:
   flutter.deployment.play-store: 0.1.0
 ```
 
+### Quick selection guide
+
+Start with the project's existing decisions. For a new project, choose only what the product needs. List-based categories can stay empty when no module applies; state management and routing each require one choice in the schema.
+
+| Category | Choose based on |
+|---|---|
+| State management | Keep the established tool. For a new choice, use GetX for its integrated state and dependency APIs, Riverpod for provider-based state and test overrides, BLoC/Cubit for explicit transitions, or Provider for a small ChangeNotifier layer. Select one primary tool. |
+| Architecture | Choose feature-based organization for capability ownership, clean architecture when domain rules need independence from I/O, layered for a few clear technical layers, or MVVM for screen-scoped presentation state. Combine architecture modules only with a documented composition decision. |
+| Networking | Use `http` for straightforward requests, Dio for shared configuration/interceptors/cancellation, or Retrofit when typed generated API declarations justify the added setup. Retrofit requires Dio. |
+| Routing | Use the project's current router. For a new choice, use GetX routing when it matches the selected GetX app conventions, or GoRouter for declarative paths, redirects, and deep links. Select one router. |
+| Storage | Use Shared Preferences for small non-sensitive settings, Secure Storage for credentials, Hive-compatible boxes for local objects, or SQLite for relational queries and transactions. Choose by data shape and sensitivity. |
+| Authentication | Select the identity or session modules the app actually uses. Google OAuth is a sign-in provider; Firebase Auth and Supabase Auth manage identity sessions; JWT describes a backend-issued API session. Combine modules only when the integration is deliberate. |
+| Backend | Use REST API for the client/server contract, FastAPI when a Python API is part of the project's integration boundary, or Firebase when managed Firebase services fit the product. These modules are optional context for Flutter app work and can describe different layers of one system when that is intentional. |
+| Testing | Select unit, widget, and integration levels by the behavior being verified. Closed and open testing are tester distribution channels, not automated test levels. |
+| Deployment | Select Android or iOS for build targets. Select Play Store when distributing Android builds through Google Play. |
+
+After choosing modules, check their `requires`, `conflicts_with`, and project version pins. When handling a task, load only the selected modules relevant to that change using [the context-loading guide](shared/documentation/agent-context-loading.md).
+
 The canonical machine-readable file is each module's `workflow.yaml`; its `entrypoint` names the human- and agent-readable procedure. IDs are stable even if display names change. `requires` names mandatory module IDs. `conflicts_with` names hard conflicts. Optional `compatible_with` is only advisory and never a complete compatibility matrix.
 
 If two architecture modules are selected, the project must state how they compose. For example, feature-based organization can contain clean-architecture layers. A second state-management or routing module is a conflict unless a deliberate migration or isolated boundary is documented.
@@ -62,7 +80,7 @@ See [`shared/documentation/agent-context-loading.md`](shared/documentation/agent
 ## Repository map
 
 - `config/` — project configuration schema and a working example.
-- `shared/` — rules that apply across selected technologies.
+- `shared/` — engineering rules that apply across the selected Flutter workflows.
 - `workflows/flutter/` — focused, independently versioned Flutter modules.
 - `templates/` — starter documents for project records.
 - `troubleshooting/` — evidence-based incident records; currently an empty knowledge base.
@@ -105,4 +123,4 @@ Add troubleshooting records only after a problem has been observed and investiga
 
 ## Future direction
 
-The intended manual loop is: project configuration → selected metadata → relevant workflows and global rules → implementation → validation → verified lessons. A loader or validator may be useful after repeated manual use, but this repository currently has no automation engine.
+The intended manual loop is: Flutter project configuration → selected workflow metadata → task-relevant rules and entrypoints → implementation → validation → verified lessons. A loader or validator may be useful after repeated manual use reveals a stable convention worth automating; this repository currently has no automation engine.
