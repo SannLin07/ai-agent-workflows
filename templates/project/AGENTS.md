@@ -8,6 +8,7 @@ Use these instructions for Flutter work in this project. Complete a task when th
 2. Inspect the relevant `pubspec.yaml`, lockfile, `analysis_options.yaml`, platform configuration, nearby implementation, and tests. Finish with the Flutter/Dart constraints, supported targets, established patterns, and project verification commands that apply to the task.
 3. Use the agent context-loading guide from the workflow library version adopted by this project. Load its canonical shared rules and only the selected workflow entrypoints that affect the task, following each required module recursively. Finish by identifying the workflow modules that inform the change.
 4. Check selected module IDs, version pins, and hard conflicts before making an incompatible choice. Resolve each conflict or report the exact decision that needs clarification before proceeding with an incompatible implementation.
+5. For a feature, bug investigation or fix, or release task, follow the applicable guide in the adopted library's `shared/task-execution/README.md`. Use its task report fields in the existing project record or final response. Resolve paths against the library's actual location in this project.
 
 ## Implement and verify
 

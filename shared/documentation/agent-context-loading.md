@@ -9,11 +9,14 @@ Use the Flutter project's configuration as an index into this library, not as a 
 3. **Load shared rules that apply.** Read the coding rules, then the relevant Git, security, error-handling, logging, documentation, and dependency-management rules. Keep each shared rule in its canonical file; workflow documents link to those rules rather than replacing them.
 4. **Resolve selected workflow IDs.** Map each selected ID to `workflows/<platform>/<category>/<slug>/workflow.yaml`. Confirm its category, version, and declared `entrypoint`. Read an entrypoint when its subject affects the task, and recursively load every module named in `requires`.
 5. **Load branch-specific references when needed.** Read a module's package list, checklist, test guide, or other nearby reference only when the implementation reaches that topic. For example, consult GetX controller testing guidance when changing a controller test.
+   For feature delivery, bug diagnosis or fixes, and release preparation or distribution, use the [task guide index](../task-execution/README.md) to load only the applicable task procedure. For other work, proceed with the relevant shared rules and selected modules.
 6. **Compare the implementation with its evidence.** Before finishing, check the change against acceptance criteria and the selected workflows' verification and completion criteria. Report which workflow guidance informed the work and which checks ran or remain unverified.
 
 ## Resolve Flutter selections
 
-For a Flutter project, `flutter.state_management` and `flutter.routing` each identify one workflow. Each ID in the architecture, networking, storage, authentication, backend, and testing lists identifies a workflow. Translate the category and slug directly to the matching module path. A missing or unknown ID is an unresolved configuration issue; do not substitute a nearby technology silently.
+For a Flutter project, `flutter.state_management` and `flutter.routing` each identify one workflow. Each ID in the architecture, networking, storage, authentication, backend, optional UI, and testing lists identifies a workflow. Translate the category and slug directly to the matching module path. A missing or unknown ID is an unresolved configuration issue; do not substitute a nearby technology silently.
+
+The optional `flutter.ui` list maps each slug to `flutter.ui.<slug>` and `workflows/flutter/ui/<slug>/workflow.yaml`. Omission or an empty list selects no UI modules and keeps existing project configurations valid. Selecting a UI module does not replace the baseline user-experience and accessibility rules in the shared coding guidance.
 
 The project configuration selects possible technologies for the app. It does not mean every selected module is relevant to every task. For a widget-only change, skip authentication and database guidance unless the behavior touches those boundaries. For an authenticated API feature, load the selected architecture, state management, networking, routing, authentication, secure storage, and testing guidance that the feature crosses.
 
@@ -35,6 +38,6 @@ Security and privacy requirements remain hard constraints. A project rule or use
 
 ## Keep context task-sized
 
-Read only the entrypoints that bear on the change, and follow their required modules. A text-only documentation change usually needs no Flutter feature workflows. A layout change may need the selected architecture, state-management, and widget-testing guidance. A new authenticated API flow may need architecture, state management, networking, routing, secure storage, authentication, the API contract, and relevant tests.
+Read only the entrypoints that bear on the change, and follow their required modules. A text-only documentation change usually needs no Flutter feature workflows. A layout change may need the selected architecture, state-management, adaptive-layout, accessibility, and widget-testing guidance. A translated form may need selected forms, localization, and relevant testing guidance. A new authenticated API flow may need architecture, state management, networking, routing, secure storage, authentication, the API contract, and relevant tests.
 
 Add detail as the task reaches a boundary, such as package-specific setup, code generation, controller lifecycle, or a platform release step. This keeps the agent's decisions grounded in the project without making it repeat unrelated library instructions.

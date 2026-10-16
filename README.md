@@ -12,11 +12,13 @@ It provides reusable instructions. It is not a Flutter starter app, generator, p
 4. Check `conflicts_with`, category cardinality, architecture composition, and the project's pinned versions before implementation. Surface unresolved conflicts instead of choosing a technology silently.
 5. Implement the requested behavior within the project's established boundaries. Verify it against acceptance criteria and applicable workflow checks, then report the guidance used and the checks that ran or remain unverified.
 
+For feature delivery, bug diagnosis, or release readiness, use the corresponding [task guide](shared/task-execution/README.md) after loading context. These draft guides connect the selected technology modules to a checkable task outcome.
+
 The library is a reference for the agent. Copy or link the selected context into each Flutter project; this repository does not fetch files or configure agents automatically. Backend modules are optional and belong in a project selection only when the Flutter app's API or service integration is part of the work.
 
 ## Select workflows
 
-Selections live in `project.yaml`. State management and routing each have one choice. Architecture, networking, storage, authentication, backend, and test stages can contain multiple IDs when they are intentionally composed.
+Selections live in `project.yaml`. State management and routing each have one choice. Architecture, networking, storage, authentication, backend, optional UI capabilities, and test stages can contain multiple IDs when they are intentionally composed.
 
 Deployment targets are selected separately from tester distribution. Unit, widget, and integration describe verification scope; closed and open testing describe Google Play tester access.
 
@@ -33,6 +35,7 @@ flutter:
   storage: [hive, secure-storage]
   authentication: [firebase-auth, google-oauth]
   backend: [firebase]
+  ui: [forms, adaptive-layout, accessibility, localization]
 testing:
   levels: [unit, widget, integration]
   release_channels: [closed-testing]
@@ -44,6 +47,10 @@ workflow_versions:
   flutter.architecture.feature-based: 0.1.0
   flutter.networking.dio: 0.1.0
   flutter.routing.getx: 0.1.0
+  flutter.ui.forms: 0.1.0
+  flutter.ui.adaptive-layout: 0.1.0
+  flutter.ui.accessibility: 0.1.0
+  flutter.ui.localization: 0.1.0
   flutter.testing.closed-testing: 0.1.0
   flutter.deployment.android: 0.1.0
   flutter.deployment.play-store: 0.1.0
@@ -62,6 +69,7 @@ Start with the project's existing decisions. For a new project, choose only what
 | Storage | Use Shared Preferences for small non-sensitive settings, Secure Storage for credentials, Hive-compatible boxes for local objects, or SQLite for relational queries and transactions. Choose by data shape and sensitivity. |
 | Authentication | Select the identity or session modules the app actually uses. Google OAuth is a sign-in provider; Firebase Auth and Supabase Auth manage identity sessions; JWT describes a backend-issued API session. Combine modules only when the integration is deliberate. |
 | Backend | Use REST API for the client/server contract, FastAPI when a Python API is part of the project's integration boundary, or Firebase when managed Firebase services fit the product. These modules are optional context for Flutter app work and can describe different layers of one system when that is intentional. |
+| UI capabilities | Optionally select `forms` for input/validation/submission, `adaptive-layout` for layout across available space and input modes, `accessibility` for semantic and assistive-technology verification, or `localization` for resources and locale behavior. Combine only those the project uses; omitting `flutter.ui` is valid. Baseline accessibility rules still apply. |
 | Testing | Select unit, widget, and integration levels by the behavior being verified. Closed and open testing are tester distribution channels, not automated test levels. |
 | Deployment | Select Android or iOS for build targets. Select Play Store when distributing Android builds through Google Play. |
 
@@ -81,11 +89,13 @@ See [`shared/documentation/agent-context-loading.md`](shared/documentation/agent
 
 - `config/` — project configuration schema and a working example.
 - `shared/` — engineering rules that apply across the selected Flutter workflows.
+- `shared/task-execution/` — draft procedures for feature, bug-fix, and release tasks.
 - `workflows/flutter/` — focused, independently versioned Flutter modules.
 - `templates/` — starter documents for project records.
 - `troubleshooting/` — evidence-based incident records; currently an empty knowledge base.
 - `scripts/` — future tooling notes only; there is no generator or workflow engine.
 - `VERSION` — release version for this collection. Module versions evolve independently.
+- `CHANGELOG.md` — unreleased upgrades and adoption notes.
 
 ## Available Flutter modules
 
@@ -96,12 +106,25 @@ See [`shared/documentation/agent-context-loading.md`](shared/documentation/agent
 - Storage: [Hive-compatible](workflows/flutter/storage/hive/workflow.md), [Shared Preferences](workflows/flutter/storage/shared-preferences/workflow.md), [Secure Storage](workflows/flutter/storage/secure-storage/workflow.md), [SQLite](workflows/flutter/storage/sqlite/workflow.md).
 - Authentication: [Firebase Auth](workflows/flutter/authentication/firebase-auth/workflow.md), [Google OAuth](workflows/flutter/authentication/google-oauth/workflow.md), [JWT sessions](workflows/flutter/authentication/jwt/workflow.md), [Supabase Auth](workflows/flutter/authentication/supabase-auth/workflow.md).
 - Backend: [REST API contracts](workflows/flutter/backend/rest-api/workflow.md), [FastAPI](workflows/flutter/backend/fastapi/workflow.md), [Firebase](workflows/flutter/backend/firebase/workflow.md).
+- UI capabilities: [forms and validation](workflows/flutter/ui/forms/workflow.md), [responsive and adaptive layouts](workflows/flutter/ui/adaptive-layout/workflow.md), [accessibility verification](workflows/flutter/ui/accessibility/workflow.md), [localization and locale behavior](workflows/flutter/ui/localization/workflow.md).
 - Testing: [unit](workflows/flutter/testing/unit/workflow.md), [widget](workflows/flutter/testing/widget/workflow.md), [integration](workflows/flutter/testing/integration/workflow.md), [closed testing](workflows/flutter/testing/closed-testing/workflow.md), [open testing](workflows/flutter/testing/open-testing/workflow.md).
 - Deployment: [Android](workflows/flutter/deployment/android/workflow.md), [iOS](workflows/flutter/deployment/ios/workflow.md), [Google Play](workflows/flutter/deployment/play-store/workflow.md).
 
 ## Templates
 
-Start from the relevant file in `templates/`: [project config and agent context](templates/project/), [feature brief](templates/feature/feature-brief.md), [bug report](templates/bug-report/bug-report.md), [troubleshooting record](templates/troubleshooting/troubleshooting-record.md), [architecture decision](templates/architecture-decision/adr.md), [code review](templates/code-review/code-review.md), or [release checklist](templates/release/release-checklist.md).
+Start from the relevant file in `templates/`: [project agent context](templates/project/AGENTS.md), [feature brief](templates/feature/feature-brief.md), [bug report](templates/bug-report/bug-report.md), [troubleshooting record](templates/troubleshooting/troubleshooting-record.md), [architecture decision](templates/architecture-decision/adr.md), [code review](templates/code-review/code-review.md), [release checklist](templates/release/release-checklist.md), or [task report](templates/task/task-report.md). The canonical project configuration example is [config/example-project.yaml](config/example-project.yaml).
+
+## Adopt the next upgrade
+
+The [planned 0.2.0 upgrade](CHANGELOG.md) adds four selectable UI modules and shared task guides. The schema remains version 1 with an optional `flutter.ui` list; existing configurations and module pins remain valid under the expanded schema. It is unreleased; `VERSION` identifies the last collection release.
+
+1. Review the new [task guides](shared/task-execution/README.md) and choose one real Flutter task for a pilot.
+2. Make the adopted library revision available to the Flutter project through its existing copy or link arrangement. Merge the task-guide pointer from [the project agent template](templates/project/AGENTS.md) into local instructions while preserving project-specific rules. If copying files, include the referenced shared guides and report template and adapt library paths to their actual location in the project.
+3. Keep existing workflow selections and pins. Resolve any existing pin mismatch through [context loading](shared/documentation/agent-context-loading.md#check-module-combinations-and-versions); adopting a shared guide is not a reason to rewrite module pins.
+   To adopt new UI modules, use this revision's schema, add only the needed `flutter.ui` slugs from [the example](config/example-project.yaml), and optionally pin their module IDs to `0.1.0`. Older library schemas do not recognize the new field, so update the library/schema before adding it.
+4. Run the task using its guide and record acceptance evidence in the existing project record or [task report](templates/task/task-report.md). Capture observed guidance gaps using the [pilot procedure](shared/task-execution/README.md#pilot-the-upgrade).
+
+No script copies files or changes a consuming project automatically. The new modules and task guides remain draft until their procedures have evidence from real project use.
 
 ## Add a workflow
 

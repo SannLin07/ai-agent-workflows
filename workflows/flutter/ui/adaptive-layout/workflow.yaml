@@ -1,0 +1,10 @@
+id: flutter.ui.adaptive-layout
+name: Responsive and adaptive layouts
+category: ui
+platform: flutter
+version: 0.1.0
+status: draft
+description: Constraint-based layouts and state-preserving adaptation across Flutter window sizes and input modes.
+entrypoint: workflow.md
+requires: []
+conflicts_with: []

@@ -1,0 +1,10 @@
+id: flutter.ui.localization
+name: Localization and locale behavior
+category: ui
+platform: flutter
+version: 0.1.0
+status: draft
+description: Localized resources, locale selection, formatting, and direction-aware Flutter UI verification.
+entrypoint: workflow.md
+requires: []
+conflicts_with: []

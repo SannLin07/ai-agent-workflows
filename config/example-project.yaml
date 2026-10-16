@@ -21,6 +21,12 @@ flutter:
     - google-oauth
   backend:
     - firebase
+  # Optional capabilities. Omit ui or use [] if none apply to this project.
+  ui:
+    - forms
+    - adaptive-layout
+    - accessibility
+    - localization
 
 testing:
   levels:
@@ -47,7 +53,11 @@ workflow_versions:
   flutter.authentication.firebase-auth: 0.1.0
   flutter.authentication.google-oauth: 0.1.0
   flutter.backend.firebase: 0.1.0
-  flutter.testing.unit: 0.1.0
+  flutter.ui.forms: 0.1.0
+  flutter.ui.adaptive-layout: 0.1.0
+  flutter.ui.accessibility: 0.1.0
+  flutter.ui.localization: 0.1.0
+  flutter.testing.unit: 0.2.0
   flutter.testing.widget: 0.1.0
   flutter.testing.integration: 0.1.0
   flutter.testing.closed-testing: 0.1.0

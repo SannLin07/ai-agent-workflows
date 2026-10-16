@@ -40,6 +40,9 @@ properties:
         $ref: '#/$defs/authenticationSelections'
       backend:
         $ref: '#/$defs/backendSelections'
+      ui:
+        description: Optional UI capabilities; omit or select only those the project uses.
+        $ref: '#/$defs/uiSelections'
   testing:
     type: object
     additionalProperties: false
@@ -110,3 +113,8 @@ $defs:
       - $ref: '#/$defs/slugList'
       - items:
           enum: [rest-api, fastapi, firebase]
+  uiSelections:
+    allOf:
+      - $ref: '#/$defs/slugList'
+      - items:
+          enum: [forms, adaptive-layout, accessibility, localization]

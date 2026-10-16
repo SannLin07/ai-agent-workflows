@@ -1,0 +1,10 @@
+id: flutter.ui.forms
+name: Forms and validation
+category: ui
+platform: flutter
+version: 0.1.0
+status: draft
+description: Input ownership, validation, submission, and recovery for Flutter forms.
+entrypoint: workflow.md
+requires: []
+conflicts_with: []

@@ -1,0 +1,10 @@
+id: flutter.ui.accessibility
+name: Accessibility verification
+category: ui
+platform: flutter
+version: 0.1.0
+status: draft
+description: Accessible interaction, semantics, and assistive-technology verification for Flutter UI changes.
+entrypoint: workflow.md
+requires: []
+conflicts_with: []
